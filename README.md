@@ -1,30 +1,84 @@
-# Project Title
+# Booking.com UI Automation – Playwright + Java
 
-## Description
-A brief description of the project.
+This project automates an end-to-end hotel search and booking validation flow on Booking.com using Playwright with Java.
 
-## Prerequisites
-- Java JDK 11 or higher
-- Maven
+---
 
-## Steps to Run the Project
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd ui_tests
-   ```
-3. Clean and compile the project:
-   ```bash
-   mvn clean install
-   ```
-4. Run the tests:
-   ```bash
-   mvn test
-   ```
+## 🚀 Tech Stack
+- Java 17
+- Playwright for browser automation
+- Maven for dependency management
+- JUnit for test execution
+- Git for version control
 
-## Additional Information
-- Ensure that all dependencies are correctly set in the `pom.xml` file.
-- Check the `execution-log.txt` for detailed execution logs.
+---
+
+## 📂 Project Structure
+
+ui_tests/
+ ├── pom.xml
+ ├── README.md
+ ├── src/test/java
+ │    ├── base
+ │    │    └── BaseTest.java
+ │    ├── pages
+ │    │    └── BookingPage.java
+ │    └── tests
+ │         └── BookingTest.java
+ ├── screenshots
+ └── target
+
+---
+
+## ✅ Automated Test Flow
+
+1. Launch Booking.com homepage.
+2. Validate search input visibility.
+3. Enter destination: Goa, India.
+4. Click search button.
+5. Wait for hotel results to load.
+6. Fetch hotel listings from the first page.
+7. Print hotel names in console logs.
+8. Capture screenshot as execution proof.
+
+---
+
+## ▶️ How To Run
+
+### Prerequisites
+- Java 17+
+- Maven installed
+- Git installed
+
+---
+
+### Install Playwright Browsers
+Run once:
+
+mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"
+
+---
+
+### Run Tests
+
+mvn clean test
+
+---
+
+## 📸 Execution Evidence
+- Screenshots are stored in the `screenshots/` directory.
+- Console logs display extracted hotel information.
+
+---
+
+## 🧩 Framework Design
+
+- Page Object Model is used to separate locators from test logic.
+- BaseTest handles browser lifecycle management.
+- BookingPage stores all UI locators.
+- BookingTest contains business flow validation.
+
+---
+
+## 👤 Author
+Atul Vikram Singh

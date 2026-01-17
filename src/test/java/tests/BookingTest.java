@@ -1,11 +1,11 @@
 package tests;
 
 import base.BaseTest;
-import com.microsoft.playwright.*;
+import com.microsoft.playwright.ElementHandle;
 import org.junit.jupiter.api.Test;
+import pages.BookingPage;
 
 import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.util.List;
 
 public class BookingTest extends BaseTest {
@@ -13,23 +13,32 @@ public class BookingTest extends BaseTest {
     @Test
     public void hotelSearchFlow() {
 
-        page.navigate("https://www.booking.com");
+        // Navigate to Booking website
+        page.navigate(BookingPage.URL);
 
-        page.waitForSelector("input[name='ss']");
-        page.fill("input[name='ss']", "Goa, India");
+        // Wait for search box and enter destination
+        page.waitForSelector(BookingPage.SEARCH_BOX);
+        page.fill(BookingPage.SEARCH_BOX, "Goa, India");
 
-        page.click("button[type='submit']");
-        page.waitForSelector("[data-testid='property-card']");
+        // Click search button
+        page.click(BookingPage.SEARCH_BUTTON);
 
+        // Wait for hotel cards to load
+        page.waitForSelector(BookingPage.HOTEL_CARD);
+
+        // Fetch all hotel listings
         List<ElementHandle> hotels =
-                page.querySelectorAll("[data-testid='property-card']");
+                page.querySelectorAll(BookingPage.HOTEL_CARD);
 
+        // Print hotel names
         for (ElementHandle hotel : hotels) {
-            String name = hotel.querySelector("[data-testid='title']").innerText();
+            String name =
+                    hotel.querySelector(BookingPage.HOTEL_NAME).innerText();
             System.out.println("Hotel: " + name);
         }
 
-        page.screenshot(new Page.ScreenshotOptions()
+        // Take screenshot for proof
+        page.screenshot(new com.microsoft.playwright.Page.ScreenshotOptions()
                 .setPath(Paths.get("screenshots/final.png")));
     }
 }
