@@ -15,18 +15,23 @@ This project automates an end-to-end hotel search and booking validation flow on
 
 ## 📂 Project Structure
 
+```
 ui_tests/
- ├── pom.xml
- ├── README.md
- ├── src/test/java
- │    ├── base
- │    │    └── BaseTest.java
- │    ├── pages
- │    │    └── BookingPage.java
- │    └── tests
- │         └── BookingTest.java
- ├── screenshots
- └── target
+├── pom.xml
+├── README.md
+├── execution-log.txt
+├── screenshots/
+├── src/
+│   └── test/
+│       └── java/
+│           ├── base/
+│           │   └── BaseTest.java
+│           ├── pages/
+│           │   └── BookingPage.java
+│           └── tests/
+│               └── BookingTest.java
+└── target/
+```
 
 ---
 
