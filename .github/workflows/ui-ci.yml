@@ -1,0 +1,55 @@
+name: UI Automation Tests
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  ui-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # ✅ Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ✅ Setup Java
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: maven
+
+      # ✅ Install Maven dependencies
+      - name: Install dependencies
+        run: mvn -B clean compile
+
+      # ✅ Install Playwright Browsers (IMPORTANT FIX)
+      - name: Install Playwright Browsers
+        run: |
+          mvn -q exec:java \
+            -Dexec.mainClass=com.microsoft.playwright.CLI \
+            -Dexec.args="install chromium"
+
+      # ✅ Run UI Tests
+      - name: Run UI Tests
+        run: mvn test
+
+      # ✅ Upload Screenshots (always)
+      - name: Upload Screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: screenshots
+
+      # ✅ Upload Allure Results
+      - name: Upload Allure Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: target/allure-results
